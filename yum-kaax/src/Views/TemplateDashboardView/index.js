@@ -18,6 +18,7 @@ import AvatarMainDashboardComponent from './AvatarMainDashboardComponent';
 import MainDashboardSection from '../../Sections/MainDashboardSection';
 import AddCropsSection from '../../Sections/AddCropsSection';
 import MonthlyReportSection from '../../Sections/MonthlyReportSection';
+import AdminSection from '../../Sections/AdminSection';
 import SimulationSection from '../../Sections/SimulationSection';
 import CropGrowthSection from '../../Sections/CropGrowthSection';
 import SelectDosificadorComponent from '../../Components/SelectDosificadorComponent';
@@ -178,7 +179,7 @@ class TemplateDashboardView extends Component {
 		});
 		console.log("data info",event.target.value);
 		console.log(this.state.machineSelected);
-		
+
 	}
 	async componentDidMount(){
 		const token =localStorage.getItem('token');
@@ -269,6 +270,7 @@ class TemplateDashboardView extends Component {
 <Route path="/main/add/crops/crop/growth" exact component={CropGrowthSection}/>
 <Route path="/main/monthly/report"  exact component={MonthlyReportSection}/>
 <Route path="/main/simulation"  exact component={SimulationSection}/>
+<Route path="/main/admin"  exact component={AdminSection}/>
 </main>
 <BottomBarMobileComponent/>
 

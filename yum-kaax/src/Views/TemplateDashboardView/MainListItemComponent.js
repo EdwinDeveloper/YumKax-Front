@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
+import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
 import AssignmentTurnedInIcon from '@material-ui/icons/AssignmentTurnedIn';
 import WallpaperIcon from '@material-ui/icons/Wallpaper';
 import NoteAddIcon from '@material-ui/icons/NoteAdd';
@@ -51,6 +52,16 @@ class MainListItemComponent extends Component {
       <ListItemText primary="Crear cultivos" />
       </ListItem>
       </NavLink>
+
+      <NavLink to="/main/admin" activeClassName="selected" style={{ textDecoration: 'none' }}>
+      <ListItem button>
+      <ListItemIcon>
+      <SupervisorAccountIcon />
+      </ListItemIcon>
+      <ListItemText primary="Crear cultivos" />
+      </ListItem>
+      </NavLink>
+
       <LogoutDialogComponent/>
 
       </div>
