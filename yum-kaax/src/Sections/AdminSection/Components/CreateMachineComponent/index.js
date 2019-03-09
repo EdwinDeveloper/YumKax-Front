@@ -104,7 +104,7 @@ class CreateMachineComponent extends Component {
       </Grid>
       <div className={classes.formContainer}>
       <FormControl className={classes.btnRight}>
-      <Button className={classes.btnCreateDosificador} >Crear dosificador</Button>
+      <Button className={classes.btnCreateDosificador} >Crear licencia</Button>
       </FormControl>
       </div>
       </div>

@@ -96,7 +96,7 @@ class NewUserComponent extends Component {
     return (
       <div className={classes.container}>
       <div className={classes.formAlign}>
-      <Typography className={classes.title}>Crea cuentas administrativas</Typography>
+      <Typography className={classes.title}>Crea usuarios administrativas</Typography>
       <div className={classes.formContainer}>
       <FormControl className={classes.formControl}>
       <InputLabel htmlFor="component-simple">Nombre completo</InputLabel>

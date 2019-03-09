@@ -59,7 +59,7 @@ class MainListItems extends Component {
       <ListItemIcon>
       <SupervisorAccountIcon/>
       </ListItemIcon>
-      <ListItemText primary="Crear cultivos" />
+      <ListItemText primary="Administrativo" />
       </ListItem>
       </NavLink>
 

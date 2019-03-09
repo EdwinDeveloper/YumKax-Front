@@ -8,19 +8,7 @@ import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import CreateMachineComponent from './Components/CreateMachineComponent';
 import NewUserComponent from './Components/NewUserComponent';
-
-function TabContainer({ children, dir }) {
-  return (
-    <Typography component="div" dir={dir} style={{ padding: 8 * 3 }}>
-      {children}
-    </Typography>
-  );
-}
-
-TabContainer.propTypes = {
-  children: PropTypes.node.isRequired,
-  dir: PropTypes.string.isRequired,
-};
+import CreatePlantsComponent from './Components/CreatePlantsComponent';
 
 const styles = theme => ({
   root: {
@@ -30,7 +18,7 @@ const styles = theme => ({
   },
 });
 
-class FullWidthTabs extends React.Component {
+class FullWidthTabs extends React.Component{
   state = {
     value: 0,
   };
@@ -42,7 +30,6 @@ class FullWidthTabs extends React.Component {
   handleChangeIndex = index => {
     this.setState({ value: index });
   };
-
   render() {
     const { classes, theme } = this.props;
 
@@ -67,7 +54,7 @@ class FullWidthTabs extends React.Component {
           onChangeIndex={this.handleChangeIndex}
         >
           <CreateMachineComponent dir={theme.direction}></CreateMachineComponent>
-          <TabContainer dir={theme.direction}>Item Two</TabContainer>
+          <CreatePlantsComponent dir={theme.direction}>Item Two</CreatePlantsComponent>
           <NewUserComponent dir={theme.direction}>Item Three</NewUserComponent>
         </SwipeableViews>
       </div>
