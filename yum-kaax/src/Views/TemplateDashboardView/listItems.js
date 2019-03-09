@@ -7,6 +7,8 @@ import AssignmentTurnedInIcon from '@material-ui/icons/AssignmentTurnedIn';
 import WallpaperIcon from '@material-ui/icons/Wallpaper';
 import NoteAddIcon from '@material-ui/icons/NoteAdd';
 import HomeIcon from '@material-ui/icons/Home';
+import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
+
 import {  NavLink } from "react-router-dom";
 import LogoutDialogComponent from '../../Components/LogoutDialogComponent';
 
@@ -46,11 +48,21 @@ class MainListItems extends Component {
       <NavLink to="/main/AddCrops" activeClassName="selected" style={{ textDecoration: 'none' }}>
       <ListItem button>
       <ListItemIcon>
-      <NoteAddIcon />
+      <NoteAddIcon/>
       </ListItemIcon>
       <ListItemText primary="Crear cultivos" />
       </ListItem>
       </NavLink>
+
+      <NavLink to="/main/admin" activeClassName="selected" style={{ textDecoration: 'none' }}>
+      <ListItem button>
+      <ListItemIcon>
+      <SupervisorAccountIcon/>
+      </ListItemIcon>
+      <ListItemText primary="Administrativo" />
+      </ListItem>
+      </NavLink>
+
       <LogoutDialogComponent/>
 
       </div>
