@@ -10,6 +10,7 @@ import InputAdornment from '@material-ui/core/InputAdornment';
 import IconButton from '@material-ui/core/IconButton';
 import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
+import {signup} from '../../../Lib/ApiService/services';
 
 const styles = theme => ({
   container: {
@@ -104,32 +105,12 @@ class FormRegisterComponent extends Component {
         [name]:val
       });
   }
-  handleCreateMondoUser(data){
-
-    console.log(data);
-      try {
-        fetch('http://localhost:8080/auth/signup',{
-          method:'POST',
-          mode:'cors',
-          headers:{
-            'Content-Type': 'application/json'
-          },
-          body:JSON.stringify(data)
-        })
-        .then(res=> res.json())
-        .then(json =>{
-          if(json.success===false){
-            alert(json.error);
-            console.log(json);
-          }
-        })
-        .catch((error)=>{
-            if(error.success===false){
-                console.log(error);
-            }
-        });
-      } catch (error) {
-        console.log("Error",error);
+  async handleCreateMondoUser(data){
+      const request = await signup(data);
+      if(request.success==false){
+        alert(request.message);
+      }else if(request==true){
+        alert(request.message);
       }
   }
   handleBuildUser(){

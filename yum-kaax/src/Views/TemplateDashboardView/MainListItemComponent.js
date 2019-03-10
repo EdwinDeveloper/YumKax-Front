@@ -11,6 +11,10 @@ import {NavLink } from "react-router-dom";
 import LogoutDialogComponent from '../../Components/LogoutDialogComponent';
 
 class MainListItemComponent extends Component {
+  constructor(props){
+    super(props);
+    this.state={}
+  }
   render(){
 
     return(
@@ -62,7 +66,7 @@ class MainListItemComponent extends Component {
       </ListItem>
       </NavLink>
 
-      <LogoutDialogComponent/>
+      <LogoutDialogComponent history={this.props.history}/>
 
       </div>
       )

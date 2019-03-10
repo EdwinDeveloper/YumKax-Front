@@ -78,6 +78,10 @@ const styles = theme => ({
 });
 
 class CardSimulationCropComponent extends Component {
+  constructor(props){
+    super(props);
+    this.state={}
+  }
   state = { expanded: false };
 
   handleExpandClick = () => {

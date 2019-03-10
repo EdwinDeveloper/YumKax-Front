@@ -13,9 +13,14 @@ import ListItemText from '@material-ui/core/ListItemText';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 
 class LogoutDialogComponent extends Component {
-  state = {
-    open: false,
-  };
+    constructor(props){
+      super(props);
+      
+        this.handleCloseSession=this.handleCloseSession.bind(this);
+    }
+    state={
+      open:false
+    }
 
   handleClickOpen = () => {
     this.setState({ open: true });
@@ -24,6 +29,10 @@ class LogoutDialogComponent extends Component {
   handleClose = () => {
     this.setState({ open: false });
   };
+  handleCloseSession = ()=>{
+    localStorage.setItem("token","");
+    this.props.history.push('/');
+  }
 
   render() {
     const { fullScreen } = this.props;
@@ -59,7 +68,7 @@ class LogoutDialogComponent extends Component {
       <Button onClick={this.handleClose} color="primary">
       No
       </Button>
-      <Button onClick={this.handleClose} color="primary" autoFocus>
+      <Button onClick={this.handleCloseSession} color="primary" autoFocus>
       Si
       </Button>
       </DialogActions>

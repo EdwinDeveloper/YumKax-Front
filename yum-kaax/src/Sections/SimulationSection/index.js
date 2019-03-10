@@ -37,6 +37,10 @@ const styles = theme => ({
 });
 
 class SimulationSection extends Component{
+  constructor(props){
+    super(props);
+    this.state={}
+  }
   state= {
     typeCrop: 'Moringa',
   }

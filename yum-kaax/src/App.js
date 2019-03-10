@@ -26,6 +26,10 @@ const theme = createMuiTheme({
 
 // Linea 22 MuiThemeProvider es la etiqueta para la creacion del theme (es obligatorio mandar a llamar el objeto de la funcion theme con su atributo como theme )
 class App extends Component {
+  constructor(props){
+    super(props);
+    this.state={}
+  }
   render() {
     return (
       <BrowserRouter>

@@ -1,6 +1,7 @@
 import React,{Component} from 'react';
 
 class CropFunction extends Component {
+<<<<<<< HEAD
   constructor(props) {
     super(props);
     this.state = {file: '',imagePreviewUrl: ''};
@@ -26,6 +27,11 @@ class CropFunction extends Component {
     }
 
     reader.readAsDataURL(file)
+=======
+  constructor(props){
+    super(props);
+    this.state={}
+>>>>>>> develop
   }
 
   render() {

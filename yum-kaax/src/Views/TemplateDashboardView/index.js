@@ -247,7 +247,7 @@ class TemplateDashboardView extends Component {
 	<div className={classes.divider}>
 	<Divider />
 	<List>
-	<MainListItemComponent/>
+	<MainListItemComponent history={this.props.history}/>
 	</List>
 	</div>
 	</Drawer>

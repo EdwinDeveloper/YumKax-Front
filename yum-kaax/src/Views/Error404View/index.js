@@ -78,6 +78,10 @@ const styles = theme => ({
 
 class Error404View extends Component {
 
+  constructor(props){
+    super(props);
+    this.state={}
+  }
   render(){
     const { classes } = this.props;
 

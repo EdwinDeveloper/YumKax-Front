@@ -10,6 +10,10 @@ import withMobileDialog from '@material-ui/core/withMobileDialog';
 import DeleteIcon from '@material-ui/icons/Delete';
 
 class DeleteCropCardComponent extends Component {
+  constructor(props){
+    super(props);
+    this.state={}
+  }
   state = {
     open: false,
   };

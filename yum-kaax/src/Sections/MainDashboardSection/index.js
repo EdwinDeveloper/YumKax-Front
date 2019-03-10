@@ -42,13 +42,17 @@ const styles = theme => ({
 });
 
 class MainDashboardSection extends Component {
+  constructor(props){
+    super(props);
+    this.state={}
+  }
 
   render() {
     const { classes , crops } = this.props;
     return (
       <div>
       <div className={classes.containerMain}>
-      <ChartTimeLineInProcessComponent/>
+      <ChartTimeLineInProcessComponent/>{/** AQUI SIGUELE DATOS TABLA*/}
       <PieChartStoryComponent/>
       </div>
       <div className={classes.containerCards}>

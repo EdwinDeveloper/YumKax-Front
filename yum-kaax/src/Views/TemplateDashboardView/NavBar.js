@@ -5,6 +5,10 @@ import Dashboard from './Dashboard';
 
 
 class NavBar extends Component {
+  constructor(props){
+    super(props);
+    this.state={}
+  }
   render() {
     return (
       <div>

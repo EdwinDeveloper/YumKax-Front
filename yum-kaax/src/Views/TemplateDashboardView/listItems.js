@@ -13,6 +13,10 @@ import {  NavLink } from "react-router-dom";
 import LogoutDialogComponent from '../../Components/LogoutDialogComponent';
 
 class MainListItems extends Component {
+  constructor(props){
+    super(props);
+    this.state={}
+  }
   render(){
 
     return(

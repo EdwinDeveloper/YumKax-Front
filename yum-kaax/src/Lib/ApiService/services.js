@@ -128,9 +128,20 @@ export function updateMachine(token,data){
     });
 }
 
+export function verifyMachine(token,data){
+    return apiFetch('/machines/verify',{
+        method:'POST',
+        headers:{
+            'Content-Type':'application/json',
+            'authorization':token
+        },
+        body: JSON.stringify(data)
+    });
+ }
+
 export function getPlants(token){
     return apiFetch('/plants',{
-        method:'PUT',
+        method:'GET',
         headers:{
             'Content-Type':'application/json',
             'authorization':token
@@ -200,5 +211,16 @@ export function getUsers(token) {
         'authorization':token
         }
      });
+ }
+
+ export function ActiveCropStories(token,data){
+    return apiFetch('/stories/user',{
+        method: 'POST',
+        headers: {
+        'Content-Type':'application/json',
+        'authorization':token
+        },
+        body: JSON.stringify(data)
+    });
  }
 

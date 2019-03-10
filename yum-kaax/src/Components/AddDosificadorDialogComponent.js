@@ -9,6 +9,8 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import { withStyles } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
 
+import {machinesAssign,verifyMachine} from '../Lib/ApiService/services';
+
 const styles = theme => ({
   containerDiv: {
     display: 'flex',
@@ -16,9 +18,28 @@ const styles = theme => ({
 });
 
 class AddDosificadorDialogComponent extends Component {
+  constructor(props){
+    super(props);
+    this.state={
+      modelo:"",
+      serie:""
+    }
+    this.handleAddDocificador=this.handleAddDocificador.bind(this);
+    this.handleChangeInput=this.handleChangeInput.bind(this);
+  }
   state = {
     open: false,
   };
+
+  handleChangeInput(event){
+    let t=event.target;
+    let v=t.value;
+    let n= t.name;
+    this.setState({
+      [n]:v
+    });
+    console.log(n,v);
+  }
 
   handleClickOpen = () => {
     this.setState({ open: true });
@@ -27,6 +48,33 @@ class AddDosificadorDialogComponent extends Component {
   handleClose = () => {
     this.setState({ open: false });
   };
+
+  handleAddDocificador = async () =>{
+    const token = localStorage.getItem('token');
+    const verify = {
+        serial_number:this.state.serie,
+        model:this.state.modelo
+    }
+    const dataDosificador = await verifyMachine(token,verify);
+
+    const recordStatus = dataDosificador.payload.machine[0].recordStatus;
+    const useStatus = dataDosificador.payload.machine[0].useStatus;
+    const asign = {
+      serial_number:this.state.serie,
+      recordStatus,
+      useStatus,
+      model:this.state.modelo
+    }
+    const assignedMachine = await machinesAssign(token,asign);
+    console.log(assignedMachine);
+    if(assignedMachine.success==true){
+      alert("Asignacion exitosa");
+    }else{
+      alert(assignedMachine.message)
+    }
+
+     
+  }
 
   render() {
     const { classes } = this.props;
@@ -52,16 +100,20 @@ class AddDosificadorDialogComponent extends Component {
       autoFocus
       margin="dense"
       id="name"
+      name="serie"
       label="Numero de serie del dosificador"
       type="text"
       fullWidth
+      onChange={this.handleChangeInput}
       />
       <TextField
       margin="dense"
       id="name"
+      name="modelo"
       label="Modelo del dosificador"
       type="text"
       fullWidth
+      onChange={this.handleChangeInput}
       />
       </div>
       </DialogContent>
@@ -69,7 +121,7 @@ class AddDosificadorDialogComponent extends Component {
       <Button onClick={this.handleClose} color="primary">
       Cancelar
       </Button>
-      <Button onClick={this.handleClose} color="primary">
+      <Button onClick={this.handleAddDocificador} color="primary">
       Confirmar
       </Button>
       </DialogActions>

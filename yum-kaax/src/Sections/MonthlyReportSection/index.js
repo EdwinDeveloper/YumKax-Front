@@ -18,6 +18,10 @@ const styles = theme => ({
   }
 });
 class MonthlyReportSection extends Component{
+  constructor(props){
+    super(props);
+    this.state={}
+  }
   render(){
     const { classes } = this.props;
     return(
