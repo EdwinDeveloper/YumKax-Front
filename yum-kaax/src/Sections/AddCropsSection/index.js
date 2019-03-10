@@ -74,9 +74,9 @@ formControl: {
 class AddCropsSection extends Component {
 
   state = {
-    age: '',
-    name: 'hai',
-    labelWidth: 0,
+    seccion: '',
+    cantidad: null,
+    seccion: null,
   };
 
   handleChange = event => {
@@ -98,21 +98,21 @@ class AddCropsSection extends Component {
       <div className={classes.containerCenter}>
 
       <FormControl className={classes.formControl}>
-      <InputLabel shrink htmlFor="age-label-placeholder">
+      <InputLabel shrink htmlFor="tipo-label-placeholder">
       Tipo de planta
       </InputLabel>
       <Select
-      value={this.state.age}
+      value={this.state.tipo}
       onChange={this.handleChange}
-      input={<Input name="age" id="age-label-placeholder" />}
+      input={<Input name="tipo" id="tipo-label-placeholder" />}
       displayEmpty
-      name="age"
+      name="tipo"
       className={classes.selectEmpty}
       >
       <MenuItem value="">Moringa</MenuItem>
       <MenuItem value={10}>Cebolla</MenuItem>
-      <MenuItem value={20}>Cilantro</MenuItem>
-      <MenuItem value={30}>Perejil</MenuItem>
+      <MenuItem value={20}>Lechuga</MenuItem>
+      <MenuItem value={30}>Pepino</MenuItem>
       </Select>
       </FormControl>
 
@@ -120,38 +120,36 @@ class AddCropsSection extends Component {
 
 
       <FormControl className={classes.formControl}>
-      <InputLabel shrink htmlFor="age-label-placeholder">
-      Tipo de planta
+      <InputLabel shrink htmlFor="cantidad-label-placeholder">
+      Cantidad
       </InputLabel>
       <Select
-      value={this.state.age}
+      value={this.state.cantidad}
       onChange={this.handleChange}
-      input={<Input name="age" id="age-label-placeholder" />}
+      input={<Input name="cantidad" id="cantidad-label-placeholder"/>}
       displayEmpty
-      name="age"
       className={classes.selectEmpty}
       >
       <MenuItem value="">2</MenuItem>
       <MenuItem value={10}>4</MenuItem>
       <MenuItem value={20}>6</MenuItem>
-      <MenuItem value={30}>8</MenuItem>
       </Select>
       </FormControl>
       <FormControl className={classes.formControl}>
-      <InputLabel shrink htmlFor="age-label-placeholder">
-      Tipo de planta
+      <InputLabel shrink htmlFor="seccion-label-placeholder">
+      Secciones
       </InputLabel>
       <Select
-      value={this.state.age}
+      value={this.state.seccion}
       onChange={this.handleChange}
-      input={<Input name="age" id="age-label-placeholder" />}
+      input={<Input name="seccion" id="seccion-label-placeholder" />}
       displayEmpty
-      name="age"
+      name="seccion"
       className={classes.selectEmpty}
       >
-      <MenuItem value="">Inicio</MenuItem>
-      <MenuItem value={10}>Fin</MenuItem>
-
+      <MenuItem value="">1</MenuItem>
+      <MenuItem value={10}>2</MenuItem>
+      <MenuItem value={20}>3</MenuItem>
       </Select>
       </FormControl>
 

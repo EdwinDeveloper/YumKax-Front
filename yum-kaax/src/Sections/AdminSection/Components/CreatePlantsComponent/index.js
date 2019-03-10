@@ -114,7 +114,7 @@ const names = [
 
 const ranges = [
   {
-    value: '0-20',
+    value: '1-20',
     label: '0 a 20',
   },
   {
