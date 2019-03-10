@@ -124,6 +124,7 @@ class FormRegisterComponent extends Component {
               serial_number,
               model
           }
+
           this.handleCreateMondoUser(jsonUser);
       }
   }
