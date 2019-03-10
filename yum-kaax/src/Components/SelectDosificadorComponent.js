@@ -30,21 +30,21 @@ class SelectDosificadorComponent extends Component {
       age: '',
       name: 'hai',
       labelWidth: 0,
+      selectMachine:''
     };
+    this.handleChange=this.handleChange.bind(this);
   }
 
 
   handleChange = (event) => {
-    this.setState({ [event.target.name]: event.target.value });
-    
-    console.log(event.target.value);
+    this.setState({ selectMachine: event.target.value });
   };
 
   render(){
     const { classes } = this.props;
-    const { machineSerial,selectMachine } = this.props
-    const machines = machineSerial.map((serial)=>{
-      return <MenuItem value={serial}>Dosificador: {serial}</MenuItem>
+    const { machines,selectMachine } = this.props;
+    const ma = machines.map((value)=>{
+      return <MenuItem value={value._id}>Dosificador: {value.serial_number}</MenuItem>
     });
     return(
 
@@ -54,14 +54,15 @@ class SelectDosificadorComponent extends Component {
       Dosificador
       </InputLabel>
       <Select
-      value={this.state.age}
-      onChange={selectMachine}
+      value={this.state.selectMachine}
+      onChange={this.handleChange}
+
       input={<Input name="age" id="age-label-placeholder" />}
       displayEmpty
       name="age"
       className={classes.selectEmpty}
       >
-            {machines}
+            {ma}
       </Select>
       </FormControl>
       </form>

@@ -139,6 +139,16 @@ export function verifyMachine(token,data){
     });
  }
 
+ export function MachinesByUser(token){
+    return apiFetch('/machines/userMachines',{
+        method:'POST',
+        headers:{
+            'Content-Type':'application/json',
+            'authorization':token
+        }
+    });
+ }
+
 export function getPlants(token){
     return apiFetch('/plants',{
         method:'GET',
@@ -151,6 +161,17 @@ export function getPlants(token){
 
 export function createPlant(token,data){
     return apiFetch('/plants',{
+        method:'POST',
+        headers:{
+            'Content-Type':'application/json',
+            'authorization':token
+        },
+        body: JSON.stringify(data)
+    });
+}
+
+export function PlantInformation(token,data){
+    return apiFetch('/plants/verify',{
         method:'POST',
         headers:{
             'Content-Type':'application/json',

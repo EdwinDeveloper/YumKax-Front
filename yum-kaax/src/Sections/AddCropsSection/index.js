@@ -78,8 +78,10 @@ class AddCropsSection extends Component {
   constructor(props){
     super(props);
     this.state={
-        plants:[]
+        plants:[],
+        selected:''
     }
+    this.handlePlantSelected=this.handlePlantSelected.bind(this);
 
   }
 
@@ -92,17 +94,19 @@ class AddCropsSection extends Component {
     const token = localStorage.getItem('token');
     const data = await getPlants(token);
     const arrayPlants = data.payload.allPlants;
-    const namePlants = [];
-    arrayPlants.forEach(plant => {
-      namePlants.push(plant.name);
-    });
     this.setState({
-      plants:namePlants
+      plants:arrayPlants
     });
   }
   handleChange = event => {
     this.setState({ [event.target.name]: event.target.value });
   };
+
+  handlePlantSelected(event){
+    this.setState({
+      selected: event.target.value
+    });
+  }
 
   render() {
     const { classes } = this.props;
@@ -123,15 +127,24 @@ class AddCropsSection extends Component {
       Tipo de planta
       </InputLabel>
 
+
       <Select
         onChange={this.handleChange}
         input={<Input name="age" id="age-label-placeholder" />}
         displayEmpty
         name="age"
-        className={classes.selectEmpty}>
-      <MenuItem value="">Lechuga</MenuItem>
-      <MenuItem>Cebolla</MenuItem>
+        className={classes.selectEmpty}
+        value={this.state.selected}
+        onChange={this.handlePlantSelected} >
+        {
+          this.state.plants.map((plant)=>{
+              return <MenuItem value={plant._id} key={plant._id}>{plant.name}</MenuItem>;
+          })
+        }
+
       </Select>
+
+
       </FormControl>
       <FormControl className={classes.formControl}>
       <InputLabel shrink htmlFor="cantidad-label-placeholder">
