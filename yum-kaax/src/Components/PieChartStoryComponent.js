@@ -6,6 +6,10 @@ const data2 = [{name: 'Group A', value: 100}, {name: 'Group B', value: 100},
 const COLORS = ['#8bA34a', '#8bc3Aa', '#8bA34a', '#Abc34a'];
 
 class PieChartStoryComponent extends Component{
+      constructor(props){
+            super(props);
+            this.state={}
+          }
       render(){
             return(
                   <div>

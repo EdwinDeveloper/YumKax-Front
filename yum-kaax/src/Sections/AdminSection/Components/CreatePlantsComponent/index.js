@@ -84,6 +84,10 @@ const styles = theme => ({
 });
 
 class CreatePlantsComponent extends Component {
+  constructor(props){
+    super(props);
+    this.state={}
+  }
   render() {
     const { classes } = this.props;
 

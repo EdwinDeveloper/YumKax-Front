@@ -9,6 +9,8 @@ import Input from '@material-ui/core/Input';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 
+import {getPlants} from '../../Lib/ApiService/services';
+
 const styles = theme => ({
   root: {
     maxWidth: 400,
@@ -73,19 +75,38 @@ formControl: {
 
 class AddCropsSection extends Component {
 
+  constructor(props){
+    super(props);
+    this.state={
+        plants:[]
+    }
+
+  }
+
   state = {
     age: '',
     name: 'hai',
     labelWidth: 0,
   };
-
+  async componentDidMount(){
+    const token = localStorage.getItem('token');
+    const data = await getPlants(token);
+    const arrayPlants = data.payload.allPlants;
+    const namePlants = [];
+    arrayPlants.forEach(plant => {
+      namePlants.push(plant.name);
+    });
+    this.setState({
+      plants:namePlants
+    });
+  }
   handleChange = event => {
     this.setState({ [event.target.name]: event.target.value });
   };
 
   render() {
     const { classes } = this.props;
-
+    // eslint-disable-next-line react/no-direct-mutation-state
     return (
 
       <div>
@@ -101,24 +122,21 @@ class AddCropsSection extends Component {
       <InputLabel shrink htmlFor="age-label-placeholder">
       Tipo de planta
       </InputLabel>
+      
       <Select
-      value={this.state.age}
-      onChange={this.handleChange}
-      input={<Input name="age" id="age-label-placeholder" />}
-      displayEmpty
-      name="age"
-      className={classes.selectEmpty}
-      >
-      <MenuItem value="">Moringa</MenuItem>
-      <MenuItem value={10}>Cebolla</MenuItem>
-      <MenuItem value={20}>Cilantro</MenuItem>
-      <MenuItem value={30}>Perejil</MenuItem>
+        onChange={this.handleChange}
+        input={<Input name="age" id="age-label-placeholder" />}
+        displayEmpty
+        name="age"
+        className={classes.selectEmpty}
+        >
+      <MenuItem value="">Lechuga</MenuItem>
+      <MenuItem>Cebolla</MenuItem>
+  
+        
       </Select>
+
       </FormControl>
-
-
-
-
       <FormControl className={classes.formControl}>
       <InputLabel shrink htmlFor="age-label-placeholder">
       Tipo de planta

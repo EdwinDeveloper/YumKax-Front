@@ -16,6 +16,10 @@ const styles = theme => ({
 });
 
 class AddDosificadorDialogComponent extends Component {
+  constructor(props){
+    super(props);
+    this.state={}
+  }
   state = {
     open: false,
   };

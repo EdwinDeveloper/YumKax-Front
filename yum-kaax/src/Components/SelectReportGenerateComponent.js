@@ -24,6 +24,11 @@ const styles = theme => ({
 
 class SelectReportGenerateComponent extends Component {
 
+  constructor(props){
+    super(props);
+    this.state={}
+  }
+
   state = {
     age: '',
     name: 'hai',

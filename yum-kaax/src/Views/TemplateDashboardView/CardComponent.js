@@ -80,6 +80,10 @@ const styles = theme => ({
 });
 
 class CardComponent extends Component {
+  constructor(props){
+    super(props);
+    this.state={}
+  }
   state = { expanded: false };
 
   handleExpandClick = () => {

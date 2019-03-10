@@ -2,6 +2,10 @@ import React,{Component} from 'react';
 import './CropFunction.css';
 
 class CropFunction extends Component {
+  constructor(props){
+    super(props);
+    this.state={}
+  }
 
   render() {
     return (

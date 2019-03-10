@@ -19,6 +19,10 @@ const styles = theme => ({
 });
 
 class FullWidthTabs extends React.Component{
+  constructor(props){
+    super(props);
+    this.state={}
+  }
   state = {
     value: 0,
   };

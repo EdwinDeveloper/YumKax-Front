@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
+import {ActiveCropStories} from '../Lib/ApiService/services';
 import { BarChart, Bar, Brush, ReferenceLine, XAxis, YAxis, CartesianGrid, Tooltip, Legend} from 'recharts';
 const styles = theme => ({
   bodyText:{
@@ -33,6 +34,14 @@ const data = [
 {name: '22', Actual: 164, Faltante: 302},
 {name: '23', Actual: 316, Faltante: 425},
 {name: '24', Actual: 131, Faltante: 467},
+{name: '25', Actual: 16, Faltante: 926},
+{name: '26', Actual: 125, Faltante: 653},
+{name: '27', Actual: 222, Faltante: 366},
+{name: '28', Actual: 372, Faltante: 486},
+{name: '29', Actual: 182, Faltante: 512},
+{name: '30', Actual: 164, Faltante: 302},
+{name: '31', Actual: 316, Faltante: 425},
+{name: '32', Actual: 131, Faltante: 467},
 ];
   // const getPercent = (value, total) => {
   //   const ratio = total > 0 ? value / total : 0;
@@ -45,6 +54,13 @@ const toPercent = (decimal, fixed = 0) => {
 };
 
 class ChartTimeLineInProcessComponent extends Component {
+  constructor(props){
+    super(props);
+    this.state={}
+  }
+  async componentDidMount(){
+    const activeCropStories = await ActiveCropStories();
+  }
   render(){
         const { classes } = this.props;
     return(

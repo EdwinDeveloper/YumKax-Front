@@ -27,6 +27,10 @@ const styles = theme => ({
 });
 
 class BottomBarMobileComponent extends React.Component {
+  constructor(props){
+    super(props);
+    this.state={}
+  }
   state = {
     bottom: false,
 

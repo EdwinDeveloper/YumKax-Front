@@ -76,28 +76,6 @@ class AppBarLoginComponent extends Component {
 
   async handleSubmit(e){
     e.preventDefault();
-    // fetch('http://localhost:8080/auth/login',{
-    //   method:'POST',
-    //   mode:'cors',
-    //   headers:{
-    //     'Content-Type': 'application/json'
-    //   },
-    //   body: JSON.stringify({
-    //     'email':this.state.email,'password':this.state.password
-    //   })
-
-    // }).then(res=>res.json()).then(json=> {
-    //   console.log(json);
-    //   if(json.message==="Logged successfuly"){
-    //       const {user_info}=json.payload;
-    //       localStorage.setItem('id_User',user_info.id_User);
-    //       localStorage.setItem('token',user_info.token);
-    //       localStorage.setItem('userName',user_info.userName);
-    //       this.props.history.push('/main');
-    //   }else if(json.success===false){
-    //       alert("Invalid data");
-    //   }
-    // })
     const dataLogin =await login({'email':this.state.email,'password':this.state.password});
     if(dataLogin.message=="Logged successfuly"){
         const token = dataLogin.payload.user_info.token;

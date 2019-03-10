@@ -11,6 +11,10 @@ const styles = theme => ({
   }
 });
 class AddCropButtonComponent extends Component {
+  constructor(props){
+    super(props);
+    this.state={}
+  }
   render(){
     const { classes } = this.props;
 

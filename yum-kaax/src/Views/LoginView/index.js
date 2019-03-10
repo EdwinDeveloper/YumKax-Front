@@ -5,6 +5,10 @@ import BottomAppBarComponent from './BottomAppBarComponent';
 
 //Inicio del componente clase LoginRegisterComponent
 class LoginRegisterView extends Component {
+  constructor(props){
+    super(props);
+    this.state={}
+  }
   render() {
     return (
       <div className="React">

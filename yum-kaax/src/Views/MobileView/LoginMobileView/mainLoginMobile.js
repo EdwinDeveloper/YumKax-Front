@@ -109,7 +109,10 @@ const styles = theme => ({
 });
 
 class MainLoginMobile extends Component {
-
+  constructor(props){
+    super(props);
+    this.state={}
+  }
   render() {
     const { classes } = this.props;
     return (

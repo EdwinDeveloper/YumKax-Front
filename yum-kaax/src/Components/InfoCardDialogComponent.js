@@ -31,6 +31,10 @@ const styles = theme => ({
 
 
 class InfoCardDialogComponent extends Component {
+  constructor(props){
+    super(props);
+    this.state={}
+  }
   state = {
     open: false,
     scroll: 'paper',

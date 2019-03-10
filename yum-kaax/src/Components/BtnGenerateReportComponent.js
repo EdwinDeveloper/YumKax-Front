@@ -3,6 +3,10 @@ import Button from '@material-ui/core/Button';
 import OpenInBrowserIcon from '@material-ui/icons/OpenInBrowser';
 
 class BtnGenerateReportComponent extends Component {
+  constructor(props){
+    super(props);
+    this.state={}
+  }
   state = {
     open: false,
     scroll: 'paper',
