@@ -7,13 +7,11 @@ import InputLabel from '@material-ui/core/InputLabel';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid'
+import TextField from '@material-ui/core/TextField';
+import Chip from '@material-ui/core/Chip';
+import Select from '@material-ui/core/Select';
+import MenuItem from '@material-ui/core/MenuItem';
 import InputAdornment from '@material-ui/core/InputAdornment';
-import IconButton from '@material-ui/core/IconButton';
-import Visibility from '@material-ui/icons/Visibility';
-import VisibilityOff from '@material-ui/icons/VisibilityOff';
-import Avatar from '@material-ui/core/Avatar';
-import AvatarImg from '../../../../Assets/Img/Avatar/avatar.jpg';
-import CropFunction from './CropFunction';
 
 const styles = theme => ({
   container: {
@@ -81,61 +79,183 @@ const styles = theme => ({
     width: 160,
     height: 160,
   },
+
+
+  chips: {
+    display: 'flex',
+    flexWrap: 'wrap',
+  },
+  chip: {
+    margin: theme.spacing.unit / 4,
+  },
+  noLabel: {
+    marginTop: theme.spacing.unit * 3,
+  },
 });
 
+
+const ITEM_HEIGHT = 48;
+const ITEM_PADDING_TOP = 8;
+const MenuProps = {
+  PaperProps: {
+    style: {
+      maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
+      width: 250,
+    },
+  },
+};
+
+const names = [
+  'Nitrato de sodio',
+  'Calcio',
+  'Fosforo',
+  'Potasio',
+];
+
+const ranges = [
+  {
+    value: '0-20',
+    label: '0 a 20',
+  },
+  {
+    value: '21-50',
+    label: '21 a 50',
+  },
+  {
+    value: '51-100',
+    label: '51 a 100',
+  },
+];
+function getStyles(name, that) {
+  return {
+    fontWeight: 'fontWeightRegular'
+  };
+}
+
 class CreatePlantsComponent extends Component {
+ state = {
+    name: [],
+    weightRange: '',
+
+  };
+handleChange = event => {
+    this.setState({ name: event.target.value });
+  };
+    handleChangeWeight = prop => event => {
+    this.setState({ [prop]: event.target.value });
+  };
+
+  handleChangeMultiple = event => {
+    const { options } = event.target;
+    const value = [];
+    for (let i = 0, l = options.length; i < l; i += 1) {
+      if (options[i].selected) {
+        value.push(options[i].value);
+      }
+    }
+    this.setState({
+      name: value,
+    });
+  };
+
   render() {
     const { classes } = this.props;
 
     return (
       <div className={classes.container}>
         <div className={classes.formAlign}>
-          <Typography className={classes.title}>Crea plantas</Typography>
-          <Grid container justify="center" alignItems="center">
-      <CropFunction/>
-    </Grid>
+          <Typography className={classes.title}>Crear planta</Typography>
         <div className={classes.formContainer}>
           <FormControl className={classes.formControl}>
-            <InputLabel htmlFor="component-simple">Nombre completo</InputLabel>
+            <InputLabel htmlFor="component-simple">Nombre</InputLabel>
             <Input onChange={this.handleChangeInput} name="name"/>
           </FormControl>
         </div>
         <div className={classes.formContainer}>
         <FormControl className={classes.formControl}>
-          <InputLabel htmlFor="component-simple">Correo electrónico</InputLabel>
-          <Input onChange={this.handleChangeInput} name="email"/>
+          <InputLabel htmlFor="component-simple">Especie</InputLabel>
+          <Input onChange={this.handleChangeInput} name="specie"/>
         </FormControl>
         <FormControl className={classes.formControl}>
-          <InputLabel htmlFor="component-simple">Usuario</InputLabel>
-          <Input onChange={this.handleChangeInput} name="user"/>
+          <InputLabel htmlFor="component-simple">Tipo</InputLabel>
+          <Input onChange={this.handleChangeInput} name="type"/>
         </FormControl>
         </div>
         <div className={classes.formContainer}>
           <FormControl className={classes.formControl}>
-            <InputLabel htmlFor="component-simple">Correo electrónico</InputLabel>
-            <Input onChange={this.handleChangeInput} name="email"/>
+            <InputLabel htmlFor="component-simple">Color</InputLabel>
+            <Input onChange={this.handleChangeInput} name="color"/>
           </FormControl>
           <FormControl className={classes.formControl}>
-            <InputLabel htmlFor="component-simple">Usuario</InputLabel>
-            <Input onChange={this.handleChangeInput} name="user"/>
+          <TextField
+          select
+          label="Peso"
+          value={this.state.weightRange}
+          onChange={this.handleChangeWeight('weightRange')}
+          InputProps={{
+            startAdornment: <InputAdornment position="start">Kg</InputAdornment>,
+          }}
+          >
+          {ranges.map(option => (
+            <MenuItem key={option.value} value={option.value}>
+            {option.label}
+            </MenuItem>
+            ))}
+          </TextField>
+          </FormControl>
+            <FormControl className={classes.formControl}>
+                        <TextField
+          label="With normal TextField"
+          id="simple-start-adornment"
+          InputProps={{
+            startAdornment: <InputAdornment position="start">Cm</InputAdornment>,
+          }}
+        />
+
           </FormControl>
         </div>
         <div className={classes.formContainer}>
+ <FormControl className={classes.formControl}>
+          <InputLabel htmlFor="select-multiple-chip">Nutrientes</InputLabel>
+          <Select
+            multiple
+            value={this.state.name}
+            onChange={this.handleChange}
+            input={<Input id="select-multiple-chip" />}
+            renderValue={selected => (
+              <div className={classes.chips}>
+                {selected.map(value => (
+                  <Chip key={value} label={value} className={classes.chip} />
+                ))}
+              </div>
+            )}
+            MenuProps={MenuProps}
+          >
+            {names.map(name => (
+              <MenuItem key={name} value={name} style={getStyles(name, this)}>
+                {name}
+              </MenuItem>
+            ))}
+          </Select>
+        </FormControl>
+        </div>
+                <div className={classes.formContainer}>
           <FormControl className={classes.formControl}>
-              <InputLabel htmlFor="component-simple">Correo electrónico</InputLabel>
-              <Input onChange={this.handleChangeInput} name="email"/>
-            </FormControl>
-            <FormControl className={classes.formControl}>
-              <InputLabel htmlFor="component-simple">Usuario</InputLabel>
-              <Input onChange={this.handleChangeInput} name="user"/>
+          <TextField
+          placeholder="Escribe aqui la descripción"
+          multiline={true}
+          rows={4}
+          name="description"
+          rowsMax={8}
+          />
           </FormControl>
         </div>
         <Grid item xs={6} sm={6} md={6} lg={6} xl={6}>
-          <Typography className={classes.terms}>Al hacer clic en "crear dosificador", agregaras a la base de datos una licencia de dosificador disponible para su venta.</Typography>
+          <Typography className={classes.terms}>Al hacer clic en "crear planta", agregaras a la base de datos una nueva planta que estará disponible para su gestion.</Typography>
         </Grid>
           <div className={classes.formContainer}>
             <FormControl className={classes.btnRight}>
-              <Button className={classes.btnCreateDosificador}>Crear usuario</Button>
+              <Button className={classes.btnCreateDosificador}>Crear planta</Button>
             </FormControl>
           </div>
         </div>

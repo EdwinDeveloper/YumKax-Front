@@ -9,6 +9,7 @@
     "highcharts": "^7.0.0",
     "material-ui-icons": "^1.0.0-beta.36",
     "react": "^16.6.3",
+    "react-avatar-edit": "^0.7.1",
     "react-dom": "^16.6.3",
     "react-google-charts": "^3.0.10",
     "react-router-dom": "^4.3.1",
