@@ -12,6 +12,7 @@ import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid'
 import InfoCardDialogComponent from '../../Components/InfoCardDialogComponent';
 import DeleteCropCardComponent from '../../Components/DeleteCropCardComponent';
+import {findUserCrops} from '../../Lib/ApiService/services';
 
 const outerTheme = createMuiTheme({
   palette: {
@@ -22,14 +23,10 @@ const outerTheme = createMuiTheme({
   typography: { useNextVariants: true },
 });
 
-
 const styles = theme => ({
 
-
   card: {
-
     margin: '10px',
-
   },
   media: {
     height: 0,
@@ -71,24 +68,33 @@ const styles = theme => ({
   padding: {
     padding: '10px !important',
   },
-
   cardContentTxt: {
     padding: '0px 3px 0px 3px !important',
-
   }
-
 });
 
 class CardComponent extends Component {
   constructor(props){
     super(props);
-    this.state={}
+    this.state={
+      Crops:[],
+      date:'',
+    }
   }
-  state = { expanded: false };
 
+  state = { expanded: false };
   handleExpandClick = () => {
     this.setState(state => ({ expanded: !state.expanded }));
   };
+
+  async componentDidMount(){
+    const token =localStorage.getItem('token');
+    const userData = await findUserCrops(token);
+    this.setState({
+    date:userData.payload.cropsUserFind[0].date
+    });
+  }
+
   render() {
     const { classes } = this.props;
     return (
@@ -98,22 +104,22 @@ class CardComponent extends Component {
       <CardHeader className={classes.cardHeader}
       avatar={
         <Avatar aria-label="Recipe" className={classes.avatar}>
-        R
         </Avatar>
       }
       action={
         <div className={classes.padding}>
         <Badge color="primary" badgeContent={''} classes={{ badge: classes.badge }}>
-        <Typography >Completado</Typography>
+        <Typography > Completado </Typography>
         </Badge>
         </div>
       }
       title="Cultivo de cebolla"
+
       subheader="September 14, 2016"
       />
       <CardContent className={classes.cardContentTxt}>
       <Typography component="p">
-      Cultivo de cebolla colocado el dia 11 de noviembre del 2018, finalizado el dia 15 de diciembre por el usuario.
+      Cultivo de cebolla colocado el dia   {this.state.date}, finalizado el dia 15 de diciembre por el usuario.
       </Typography>
       </CardContent>
       </div>

@@ -193,10 +193,6 @@ class TemplateDashboardView extends Component {
 	render() {
 		const { classes } = this.props;
 		return (
-
-
-
-
 			<BrowserRouter>
 			<div className={classes.root2}>
 			<CssBaseline />
@@ -214,36 +210,22 @@ class TemplateDashboardView extends Component {
 		YUM-KAAX
 		</Typography>
 		</Toolbar>
-
 		</AppBar>
-
 
 	{/*----------------------------Inicio contenedor navBar avatar--------------------------------------*/}
 
 	<Drawer variant="permanent" classes={{ paper: classNames(classes.drawerPaper, !this.state.open && classes.drawerPaperClose),}}open={this.state.open} >
-
-
-
-
-
 	<div className={classes.toolbarIcon}>
 	<IconButton className={classes.toolbarIconright} onClick={this.handleDrawerClose}>
 	<ChevronLeftIcon />
 	</IconButton>
-
-
 	<div aria-label="Open drawer" className={classNames(!this.state.open && classes.menuButtonHidden,)}>
 	<AvatarMainDashboardComponent/>
 	<Typography  gutterBottom align="center">
 	{this.state.userName}
 	</Typography>
 	</div>
-
-
-
 	</div>
-
-
 	<div className={classes.divider}>
 	<Divider />
 	<List>

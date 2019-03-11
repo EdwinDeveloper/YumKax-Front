@@ -84,7 +84,7 @@ class AddCropsSection extends Component {
   }
 
   state = {
-    seccion: '',
+    tipo: '',
     cantidad: null,
     seccion: null,
   };
@@ -122,13 +122,14 @@ class AddCropsSection extends Component {
       <InputLabel shrink htmlFor="tipo-label-placeholder">
       Tipo de planta
       </InputLabel>
-
       <Select
-        onChange={this.handleChange}
-        input={<Input name="age" id="age-label-placeholder" />}
-        displayEmpty
-        name="age"
-        className={classes.selectEmpty}>
+      value={this.state.tipo}
+      onChange={this.handleChange}
+      input={<Input name="tipo" id="tipo-label-placeholder" />}
+      displayEmpty
+      name="tipo"
+      className={classes.selectEmpty}
+        >
       <MenuItem value="">Lechuga</MenuItem>
       <MenuItem>Cebolla</MenuItem>
       </Select>
