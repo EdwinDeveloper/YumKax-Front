@@ -8,8 +8,8 @@ import FormControl from '@material-ui/core/FormControl';
 import Input from '@material-ui/core/Input';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
-
-import {getPlants} from '../../Lib/ApiService/services';
+import Grid from '@material-ui/core/Grid';
+import {getPlants,MachinesByUser,CreateAssignCrop} from '../../Lib/ApiService/services';
 
 const styles = theme => ({
   root: {
@@ -71,6 +71,12 @@ formControl: {
   margin: theme.spacing.unit,
   minWidth: 120,
 },
+alignCenter:{
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'inherit',
+  justifyContent: 'center',
+},
 });
 
 class AddCropsSection extends Component {
@@ -79,33 +85,62 @@ class AddCropsSection extends Component {
     super(props);
     this.state={
         plants:[],
-        selected:''
+        machinesAvailable:[],
+
+        machineSelected:'',
+        selected:'',
+
+        amountPlants:'',
+        sections:''
     }
     this.handlePlantSelected=this.handlePlantSelected.bind(this);
-
+    this.newCrop=this.newCrop.bind(this);
   }
 
   state = {
-    seccion: '',
+    tipo: '',
     cantidad: null,
     seccion: null,
   };
   async componentDidMount(){
     const token = localStorage.getItem('token');
-    const data = await getPlants(token);
-    const arrayPlants = data.payload.allPlants;
+    const dataPlants = await getPlants(token);
+    const arrayPlants = dataPlants.payload.allPlants;
+    const dataMachines = await MachinesByUser(token);
+    const arrayMachines = dataMachines.payload.machine;
+    const machinesAvailable = arrayMachines.reduce((reducer,currentMachine,index)=>{
+        if(currentMachine.useStatus==="false"){
+            return [...reducer,currentMachine];
+        }
+        return reducer;
+    },[]);
     this.setState({
-      plants:arrayPlants
+      plants:arrayPlants,
+      machinesAvailable:machinesAvailable
     });
   }
-  handleChange = event => {
-    this.setState({ [event.target.name]: event.target.value });
-  };
-
   handlePlantSelected(event){
-    this.setState({
-      selected: event.target.value
-    });
+    this.setState({ [event.target.name]: event.target.value });
+  }
+
+  async newCrop(){
+    const {selected,amountPlants,sections}=this.state;
+    if(selected==='' || amountPlants==='' || sections===''){
+      alert("Campos vacios");
+    }else{
+      const newCrop = {
+        plantAmount:this.state.amountPlants,
+        cropTime:'summer',
+        wheader:'humid',
+        date:'2019-03-10T06:00:00.000Z',
+        cropStatus:'active',
+        id_plant:this.state.selected,
+        id_machine:this.state.machineSelected
+      }
+      const token = localStorage.getItem('token');
+      const newC = await CreateAssignCrop(token,newCrop);
+      alert(newC.message);
+    }
   }
 
   render() {
@@ -115,24 +150,49 @@ class AddCropsSection extends Component {
 
       <div>
       <div className={classes.containerGeneral}>
+      <Grid item xs={12}sm={12}md={12}lg={12}xl={12} className={classes.alignCenter}>
+
       <div className={classes.containerMain}>
+
+      <FormControl className={classes.formControl}>
+      {/********************MACHINES*****************************/}
+      <InputLabel shrink htmlFor="age-label-placeholder">
+        Dosificador disponibles
+      </InputLabel>
+
+      <Select
+          input={<Input name="age" id="age-label-placeholder" />}
+          displayEmpty
+          name="machineSelected"
+          className={classes.selectEmpty}
+          value={this.state.machineSelected}
+          onChange={this.handlePlantSelected}
+          >
+          {
+            this.state.machinesAvailable.map((machine)=>{
+                return <MenuItem value={machine._id} key={machine._id}>{machine.serial_number}</MenuItem>;
+            })
+          }
+      </Select>
+
+      </FormControl>
       <img alt="Remy Sharp" src={ImgCrop} className={classes.img} />
       </div>
+      </Grid>
 
       <div className={classes.container}>
       <div className={classes.containerCenter}>
 
       <FormControl className={classes.formControl}>
+      {/*****************MACHINES***********************/}
       <InputLabel shrink htmlFor="tipo-label-placeholder">
       Tipo de planta
       </InputLabel>
-
-
+      {/** **********************PLANTS NAMES*************************/}
       <Select
-        onChange={this.handleChange}
         input={<Input name="age" id="age-label-placeholder" />}
         displayEmpty
-        name="age"
+        name="selected"
         className={classes.selectEmpty}
         value={this.state.selected}
         onChange={this.handlePlantSelected} >
@@ -141,7 +201,6 @@ class AddCropsSection extends Component {
               return <MenuItem value={plant._id} key={plant._id}>{plant.name}</MenuItem>;
           })
         }
-
       </Select>
 
 
@@ -150,42 +209,49 @@ class AddCropsSection extends Component {
       <InputLabel shrink htmlFor="cantidad-label-placeholder">
       Cantidad
       </InputLabel>
+
+        {/**********************AMOUNT PLANTS*******************+*/}
       <Select
-      value={this.state.cantidad}
+      value={this.state.amountPlants}
       onChange={this.handleChange}
       input={<Input name="cantidad" id="cantidad-label-placeholder"/>}
       displayEmpty
+      name="amountPlants"
       className={classes.selectEmpty}
+      onChange={this.handlePlantSelected}
       >
-      <MenuItem value="">2</MenuItem>
-      <MenuItem value={10}>4</MenuItem>
-      <MenuItem value={20}>6</MenuItem>
+      <MenuItem value={2} key={2} >2</MenuItem>
+      <MenuItem value={4} key={4} >4</MenuItem>
+      <MenuItem value={6} key={6} >6</MenuItem>
       </Select>
+
       </FormControl>
       <FormControl className={classes.formControl}>
       <InputLabel shrink htmlFor="seccion-label-placeholder">
       Secciones
       </InputLabel>
+
+      {/******************SECTIONS*******************************/}
       <Select
-      value={this.state.seccion}
-      onChange={this.handleChange}
+      value={this.state.sections}
+      onChange={this.handlePlantSelected}
       input={<Input name="seccion" id="seccion-label-placeholder" />}
       displayEmpty
-      name="seccion"
+      name="sections"
       className={classes.selectEmpty}
       >
-      <MenuItem value="">1</MenuItem>
-      <MenuItem value={10}>2</MenuItem>
-      <MenuItem value={20}>3</MenuItem>
+      <MenuItem value={1}>1</MenuItem>
+      <MenuItem value={2}>2</MenuItem>
+      <MenuItem value={3}>3</MenuItem>
       </Select>
       </FormControl>
 
       </div>
 
-      <Link to="/main/add/crops/crop/growth" style={{ textDecoration: 'none' }} >
-      <Button   type="submit" className={classes.btnLogin}>Crear cultivo
+      {/*<Link to="/main/add/crops/crop/growth" style={{ textDecoration: 'none' }} >*/}
+      <Button   type="submit" onClick={this.newCrop} className={classes.btnLogin}>Crear cultivo
       </Button>
-      </Link>
+      {/*</Link>*/}
       </div>
       </div>
       </div>

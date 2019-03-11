@@ -12,7 +12,7 @@ export function changeNumberOfData(data) {
   }
 
   if (typeof data === 'object') {
-    return .mapValues(data, val => {
+    return data.mapValues(data, val => {
       if (typeof val === 'number') {
         return parseInt(val * Math.random() * 2, 10);
       }
