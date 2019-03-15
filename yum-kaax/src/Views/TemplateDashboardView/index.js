@@ -24,7 +24,7 @@ import CropGrowthSection from '../../Sections/CropGrowthSection';
 import SelectDosificadorComponent from '../../Components/SelectDosificadorComponent';
 import AddDosificadorDialogComponent from '../../Components/AddDosificadorDialogComponent';
 import BottomBarMobileComponent from '../MobileView/BottomBarMobileComponent';
-import { DashBoardInformationUser } from '../../Lib/ApiService/services';
+import { MachinesByUser } from '../../Lib/ApiService/services';
 const drawerWidth = 240;
 
 const styles = theme => ({
@@ -155,7 +155,7 @@ class TemplateDashboardView extends Component {
 		super(props);
 		this.state={
 			userName:'',
-			serialsMachines:[],
+			machines:[],
 			cropsUser:[],
 			machineSelected:''
 		}
@@ -177,18 +177,15 @@ class TemplateDashboardView extends Component {
 		 	this.setState({
 			machineSelected:event.target.value,
 		});
-		console.log("data info",event.target.value);
-		console.log(this.state.machineSelected);
 
 	}
 	async componentDidMount(){
 		const token =localStorage.getItem('token');
-		const userData = await DashBoardInformationUser(token);
-		console.log(userData);
+		const machinesData = await MachinesByUser(token);
 		this.setState({
-			serialsMachines:userData.payload.machinesSerial,
-			userName:userData.payload.user
+			machines:machinesData.payload.machine
 		});
+		
 	}
 	render() {
 		const { classes } = this.props;
@@ -244,7 +241,7 @@ class TemplateDashboardView extends Component {
 <main className={classes.content}>
 <div className={classes.appBarSpacer} />
 <div className={classes.containerCardHeader}>
-<SelectDosificadorComponent selectMachine={this.handleMahineSelected} machineSerial={this.state.serialsMachines}/>
+<SelectDosificadorComponent machines={this.state.machines}/>
 <AddDosificadorDialogComponent/>
 </div>
 <Route path="/main" exact component={MainDashboardSection}/>

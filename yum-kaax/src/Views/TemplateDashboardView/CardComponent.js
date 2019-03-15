@@ -96,6 +96,7 @@ class CardComponent extends Component {
   }
 
   render() {
+    let {date,cropTime,cropStatus} = this.props;
     const { classes } = this.props;
     return (
       <Grid item xs={12} sm={12} md={6} lg={4} xl={3}>
@@ -109,7 +110,7 @@ class CardComponent extends Component {
       action={
         <div className={classes.padding}>
         <Badge color="primary" badgeContent={''} classes={{ badge: classes.badge }}>
-        <Typography > Completado </Typography>
+        <Typography > {cropStatus} </Typography>
         </Badge>
         </div>
       }
@@ -119,7 +120,7 @@ class CardComponent extends Component {
       />
       <CardContent className={classes.cardContentTxt}>
       <Typography component="p">
-      Cultivo de cebolla colocado el dia   {this.state.date}, finalizado el dia 15 de diciembre por el usuario.
+      Cultivo de cebolla colocado el dia   {date}, finalizado el dia {cropTime} por el usuario.
       </Typography>
       </CardContent>
       </div>

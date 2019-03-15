@@ -6,6 +6,7 @@ import AddCropButtonComponent from '../../Components/AddCropButtonComponent';
 import ChartTimeLineInProcessComponent from '../../Components/ChartTimeLineInProcessComponent';
 import PieChartStoryComponent from '../../Components/PieChartStoryComponent';
 import { NavLink } from 'react-router-dom';
+import {findUserCrops} from '../../Lib/ApiService/services';
 
 const styles = theme => ({
   root: {
@@ -44,11 +45,31 @@ const styles = theme => ({
 class MainDashboardSection extends Component {
   constructor(props){
     super(props);
-    this.state={}
+    this.state={
+      crops:[],
+    }
+  }
+  async componentDidMount() {
+    const token = localStorage.getItem("token");
+    const showCardFunction = await findUserCrops(token);
+    this.setState({
+          crops:showCardFunction.payload.cropsUserFind
+    });
   }
 
   render() {
-    const { classes , crops } = this.props;
+    const { classes } = this.props;
+      let {crops} = this.state;
+      let getCrops = [];
+      if(crops.length > 0){
+        getCrops = crops.map((crop, index)=> {
+        return(
+            <CardComponent key={index} date={crop.date} cropTime={crop.cropTime}
+            cropStatus={crop.cropStatus}>
+            </CardComponent>
+          )
+      })
+      }
     return (
       <div>
       <div className={classes.containerMain}>
@@ -56,8 +77,7 @@ class MainDashboardSection extends Component {
       <PieChartStoryComponent/>
       </div>
       <div className={classes.containerCards}>
-      <CardComponent/>
-      <CardComponent/>
+      {getCrops}
       </div>
       <NavLink to="/main/add/crops" activeClassName="selected" style={{ textDecoration: 'none' }}>
       <div className={classes.addButton}>
