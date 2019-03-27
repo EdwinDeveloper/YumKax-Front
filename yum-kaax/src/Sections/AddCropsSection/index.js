@@ -86,10 +86,8 @@ class AddCropsSection extends Component {
     this.state={
         plants:[],
         machinesAvailable:[],
-
         machineSelected:'',
         selected:'',
-
         amountPlants:'',
         sections:''
     }
@@ -145,7 +143,6 @@ class AddCropsSection extends Component {
 
   render() {
     const { classes } = this.props;
-    // eslint-disable-next-line react/no-direct-mutation-state
     return (
 
       <div>
@@ -155,7 +152,6 @@ class AddCropsSection extends Component {
       <div className={classes.containerMain}>
 
       <FormControl className={classes.formControl}>
-      {/********************MACHINES*****************************/}
       <InputLabel shrink htmlFor="age-label-placeholder">
         Dosificador disponibles
       </InputLabel>
@@ -184,12 +180,9 @@ class AddCropsSection extends Component {
       <div className={classes.containerCenter}>
 
       <FormControl className={classes.formControl}>
-      {/*****************MACHINES***********************/}
       <InputLabel shrink htmlFor="tipo-label-placeholder">
       Tipo de planta
       </InputLabel>
-
-      {/** **********************PLANTS NAMES*************************/}
       <Select
         input={<Input name="age" id="age-label-placeholder" />}
         displayEmpty
@@ -209,7 +202,6 @@ class AddCropsSection extends Component {
       Cantidad
       </InputLabel>
 
-        {/**********************AMOUNT PLANTS*******************+*/}
       <Select
       value={this.state.amountPlants}
       onChange={this.handleChange}
@@ -230,7 +222,6 @@ class AddCropsSection extends Component {
       Secciones
       </InputLabel>
 
-      {/******************SECTIONS*******************************/}
       <Select
       value={this.state.sections}
       onChange={this.handlePlantSelected}
@@ -247,10 +238,8 @@ class AddCropsSection extends Component {
 
       </div>
 
-      {/*<Link to="/main/add/crops/crop/growth" style={{ textDecoration: 'none' }} >*/}
       <Button   type="submit" onClick={this.newCrop} className={classes.btnLogin}>Crear cultivo
       </Button>
-      {/*</Link>*/}
       </div>
       </div>
       </div>

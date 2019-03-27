@@ -133,12 +133,32 @@ function getStyles(name, that) {
 }
 
 class CreatePlantsComponent extends Component {
+  constructor(props){
+    super(props);
+    this.state={
+      name:'',
+      specie:'',
+      type:'',
+      color:'',
+      weight:'',
+      height:'',
+      description:''
+    }
+    this.createPlantMethod=this.createPlantMethod.bind(this);
+  }
+
+  createPlantMethod(event){
+      this.setState({
+        [event.target.name]:event.target.value
+      });
+  }
+
  state = {
     name: [],
     weightRange: '',
 
   };
-handleChange = event => {
+  handleChange = event => {
     this.setState({ name: event.target.value });
   };
     handleChangeWeight = prop => event => {
@@ -169,23 +189,23 @@ handleChange = event => {
         <div className={classes.formContainer}>
           <FormControl className={classes.formControl}>
             <InputLabel htmlFor="component-simple">Nombre</InputLabel>
-            <Input onChange={this.handleChangeInput} name="name"/>
+            <Input onChange={this.createPlantMethod} name="name"/>
           </FormControl>
         </div>
         <div className={classes.formContainer}>
         <FormControl className={classes.formControl}>
           <InputLabel htmlFor="component-simple">Especie</InputLabel>
-          <Input onChange={this.handleChangeInput} name="specie"/>
+          <Input onChange={this.createPlantMethod} name="specie"/>
         </FormControl>
         <FormControl className={classes.formControl}>
           <InputLabel htmlFor="component-simple">Tipo</InputLabel>
-          <Input onChange={this.handleChangeInput} name="type"/>
+          <Input onChange={this.createPlantMethod} name="type"/>
         </FormControl>
         </div>
         <div className={classes.formContainer}>
           <FormControl className={classes.formControl}>
             <InputLabel htmlFor="component-simple">Color</InputLabel>
-            <Input onChange={this.handleChangeInput} name="color"/>
+            <Input onChange={this.createPlantMethod } name="color"/>
           </FormControl>
           <FormControl className={classes.formControl}>
           <TextField
@@ -194,7 +214,7 @@ handleChange = event => {
           value={this.state.weightRange}
           onChange={this.handleChangeWeight('weightRange')}
           InputProps={{
-            startAdornment: <InputAdornment position="start">Kg</InputAdornment>,
+            startAdornment: <InputAdornment onChange={this.createPlantMethod} name="weight" position="start">Kg</InputAdornment>,
           }}
           >
           {ranges.map(option => (
@@ -209,10 +229,10 @@ handleChange = event => {
           label="With normal TextField"
           id="simple-start-adornment"
           InputProps={{
-            startAdornment: <InputAdornment position="start">Cm</InputAdornment>,
+            startAdornment: <InputAdornment name="height" position="start">Cm</InputAdornment>,
           }}
-        />
 
+        />
           </FormControl>
         </div>
         <div className={classes.formContainer}>
